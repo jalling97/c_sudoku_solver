@@ -8,6 +8,7 @@ short *get_block(int row, int col, short board[9][9]) {
     
     static short block[9];
     
+    //integer arithmetic allows rounding to the nearest block
     int ro = 3*(row/3); //row offset
     int co = 3*(col/3); //col offset
 
@@ -41,10 +42,9 @@ short valid_entry(short board[9][9], int row, int col)
 {
     //simply check if there is a duplicate in the given row and column
     // Then do the same for the block (a little more complex)
-    // need a function for returning a list of numbers given a block #)
 
     short num = board[row][col];
-    if(num == 0)
+    if(num == 0) //invalid if the entry in question is zero
         return 0;
 
     //row check
@@ -103,10 +103,6 @@ int backtrack(int pos, short locked_nums[9][9])
 //read the board from txt file
 void create_board(char* filename, short board[9][9])
 {
-    //board = (int*) malloc(9 * 9 * sizeof(int));
-
-    int row_index = 0;
-
     FILE *fp;
     char line[10];
     fp = fopen(filename, "r"); //open the txt file
@@ -125,7 +121,7 @@ void create_board(char* filename, short board[9][9])
     fclose(fp);
 }
 
-//print the solved board
+//print the board
 void print_board(short board[9][9])
 {
     printf("-------------------\n");
@@ -153,7 +149,7 @@ void print_board(short board[9][9])
 
 }
 
-/*Implement solving algorithm
+/*Solving algorithm
     Brute force approach
       use a while loop to go through each spot on the board
       if not a locked spot, 
@@ -162,6 +158,8 @@ void print_board(short board[9][9])
         if valid, continue to next position
         if not valid, increment the number in the spot
         repeat for all spots on the board
+
+    returns 1 if valid solution found, 0 otherwise
 */
 int solve_board(short board[9][9])
 {
@@ -169,9 +167,8 @@ int solve_board(short board[9][9])
     set_locked_nums(locked_nums, board);
 
     int pos = 0; //position on board
-    int dec = 0;
 
-    //81 total spots on a Sudoku board
+    //81 total positions on a Sudoku board
     while(pos < 81)
     {
         int row = pos/9; //
@@ -182,11 +179,11 @@ int solve_board(short board[9][9])
             return 0;
         }
 
-        //printf("pos: %d\n",pos);
-
         //if not a protected square
         if(locked_nums[row][col] == 0)
         {
+            //if board reaches 9 and is still invalid,
+            //must reset and backtrack
             if(board[row][col] == 9)
             {
                 board[row][col] = 0;
@@ -208,7 +205,7 @@ int solve_board(short board[9][9])
         }
     }
 
-    return 1;
+    return 1; //valid solution
 }
 
 int main()
