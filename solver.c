@@ -212,7 +212,7 @@ int main()
 {
     short board [9][9] = {0}; //initialize board to all zeroes
 
-    char* filename = "/home/john/coding/c_sudoku_solver/boards/board_1.txt";
+    char* filename = "boards/board_1.txt";
 
     create_board(filename, board); //read starting board from file
     printf("Starting Board:\n");
