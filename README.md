@@ -9,8 +9,14 @@ completion. All outputs are provided as command line prints.
 
 The current implementation is only around 200 lines of code and has
 logic built in to detect impossible puzzles. This quick project is
-a fun exercise in file io and pointer arithmetic, and is a good example
+a fun exercise in file IO and pointer arithmetic and is a good example
 of procedural programming.
+
+# Compile/Run Instructions
+Compile using gcc \
+`gcc solver.c -o solver` \
+Run from CL \
+`./solver`
 
 # Next Steps
 - Implement a stochastic solving algorithm
