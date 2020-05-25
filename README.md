@@ -1,5 +1,5 @@
-# c_sudoku_solver
-A **L**ightweight **S**udoku **S**olver using **C** (or **LSSC**)
+# LSSC
+A **L**ightweight **S**udoku **S**olver using **C**
 
 LSSC uses a backtracking algorithm approach to solve Sudoku puzzles.
 A starting configuration is read in (in the form of a .txt file)
